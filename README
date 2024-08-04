@@ -1,0 +1,26 @@
+
+# Weather Data Analysis
+
+This project performs various analyses on weather data using Python libraries such as Pandas, NumPy, and SQLite.
+
+## Dependencies
+
+- pandas
+- numpy
+- sqlite3 (pre-installed with Python)
+
+### Usage
+
+1. Install required libraries:
+
+   ```sh
+   pip install pandas numpy
+   ```
+   
+2. Update the `csv_file_path` variable with the path to your weather data CSV file in the script.
+3. Run the Python script.
+
+For detailed instructions and code explanations, please refer to the inline comments within the script files:
+
+- `csv/README`: Contains the csv data analysis logic.
+- `sql/README`: Handles SQLite database operations.

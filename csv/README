@@ -1,0 +1,123 @@
+
+
+# Weather Data Analysis
+
+This Python script performs various analyses on weather data using Pandas and NumPy. It explores weather conditions, calculates statistical measures, and filters data based on specific criteria.
+
+## Dependencies
+
+- pandas
+- numpy
+
+### Usage
+
+1. Ensure you have the required libraries installed:
+   ```sh
+   pip install pandas numpy
+   ```
+2. Place your weather data CSV file in the specified path in the script or update the `csv_file_path` variable with the correct file path.
+3. Run the Python script.
+
+### Code Explanation
+
+The code performs the following operations:
+
+1. **Load the CSV file into a DataFrame:**
+
+   ```python
+   csv_file_path = '/exp/weatherdb/1. Weather Data.csv'
+   df = pd.read_csv(csv_file_path)
+   ```
+   - Loads weather data from the specified CSV file into a Pandas DataFrame for further manipulation and analysis.
+
+2. **Find all records where the weather was exactly clear:**
+
+   ```python
+   clear_weather = df[df['Weather'] == 'Clear']
+   print("Records where the weather was exactly clear:")
+   print(clear_weather)
+   ```
+   - Filters the DataFrame to find all records with the weather condition "Clear".
+
+3. **Find the number of times the wind speed was exactly 4 km/hr:**
+
+   ```python
+   wind_speed_4_kmph = df[df['Wind Speed_km/h'] == 4].shape[0]
+   print(f"\nNumber of times the wind speed was exactly 4 km/hr: {wind_speed_4_kmph}")
+   ```
+   - Counts the number of occurrences where the wind speed is exactly 4 km/hr.
+
+4. **Check if there are any NULL values present in the dataset:**
+
+   ```python
+   null_values = df.isnull().sum()
+   print("\nCheck for NULL values in the dataset:")
+   print(null_values)
+   ```
+   - Checks for any NULL values in the dataset and counts them for each column.
+
+5. **Rename the column "Weather" to "Weather_Condition":**
+
+   ```python
+   df.rename(columns={'Weather': 'Weather_Condition'}, inplace=True)
+   print("\nColumns after renaming:")
+   print(df.columns)
+   ```
+   - Renames the column "Weather" to "Weather_Condition" for better clarity.
+
+6. **Calculate the mean visibility of the dataset:**
+
+   ```python
+   mean_visibility = df['Visibility_km'].mean()
+   print(f"\nMean visibility of the dataset: {mean_visibility} km")
+   ```
+   - Calculates the mean visibility of the dataset.
+
+7. **Find the number of records where the wind speed is greater than 24 km/hr and visibility is equal to 25 km:**
+
+   ```python
+   specific_condition = df[(df['Wind Speed_km/h'] > 24) & (df['Visibility_km'] == 25)].shape[0]
+   print(f"\nNumber of records with wind speed > 24 km/hr and visibility_km = 25 km: {specific_condition}")
+   ```
+   - Filters records where the wind speed is greater than 24 km/hr and visibility is equal to 25 km, then counts the occurrences.
+
+8. **Calculate the mean value of each column for each weather condition:**
+
+   ```python
+   df['Date/Time'] = pd.to_datetime(df['Date/Time'])
+   numeric_columns = df.select_dtypes(include=[np.number]).columns
+   mean_values_per_weather = df.groupby('Weather_Condition')[numeric_columns].mean()
+   print("\nMean value of each column for each weather condition:")
+   print(mean_values_per_weather)
+   ```
+   - Converts 'Date/Time' to datetime, selects numeric columns, and calculates the mean of each column for each weather condition.
+
+9. **Find all instances where the weather is clear and the relative humidity is greater than 50, or visibility is above 40:**
+
+   ```python
+   specific_conditions = df[(df['Weather_Condition'] == 'Clear') & ((df['Rel Hum_%'] > 50) | (df['Visibility_km'] > 40))]
+   print("\nInstances where the weather is clear and relative humidity > 50, or visibility > 40:")
+   print(specific_conditions)
+   ```
+   - Filters records where the weather is clear and either the relative humidity is greater than 50 or visibility is above 40.
+
+10. **Find the number of weather conditions that include snow:**
+
+    ```python
+    snow_conditions = df[df['Weather_Condition'].str.contains('Snow', case=False, na=False)].shape[0]
+    print(f"\nNumber of weather conditions that include snow: {snow_conditions}")
+    ```
+    - Counts the number of weather conditions that include the term "Snow".
+
+### Results
+
+- The mean visibility of the dataset is calculated to be [mean_visibility] km.
+- The number of records with wind speed greater than 24 km/hr and visibility of 25 km is [specific_condition].
+- The number of weather conditions that include snow is [snow_conditions].
+- Instances where the weather is clear and relative humidity is greater than 50, or visibility is above 40, are listed.
+
+### Future Improvements
+
+- **Incorporate more complex weather analysis techniques:** For example, time series analysis to detect trends and patterns over time.
+- **Visualize the data using plotting libraries:** Utilize libraries such as Matplotlib or Seaborn to create visual representations of the data.
+- **Explore machine learning models for weather prediction:** Implement and evaluate machine learning algorithms to predict future weather conditions based on historical data.
