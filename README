@@ -24,3 +24,6 @@ For detailed instructions and code explanations, please refer to the inline comm
 
 - `csv/README`: Contains the csv data analysis logic.
 - `sql/README`: Handles SQLite database operations.
+
+
+web article https://medium.com/@nevilleachi/learning-data-science-as-a-web-developer-e2dd8fa23493
